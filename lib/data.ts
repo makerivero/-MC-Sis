@@ -23,9 +23,9 @@ export const contactEmail = "makerivero@gmail.com";
 export const navItems = [
   { label: "Inicio", href: "#inicio" },
   { label: "Servicios", href: "#servicios" },
-  { label: "Portfolio", href: "#demos" },
+  { label: "Portafolio", href: "#demos" },
   { label: "Planes", href: "#planes" },
-  { label: "Proceso", href: "#proceso" },
+  { label: "Nosotros", href: "#proceso" },
   { label: "Contacto", href: "#contacto" }
 ];
 
@@ -88,55 +88,38 @@ export const demos = [
 
 export const plans = [
   {
-    name: "Plan Inicial",
+    name: "START",
+    subtitle: "Sitio One Page",
     price: "$250.000 ARS",
     badge: "Start",
     color: "text-lime",
     check: "text-lime",
     surface: "border-white/12 bg-white/6",
-    description: "Sitio one page para presencia digital rápida.",
-    features: ["One page", "Diseño personalizado", "Hasta 5 secciones", "Formulario de contacto", "Optimización SEO básica"]
+    description: "Ideal para emprendimientos y presencia digital rápida.",
+    features: ["One Page", "Diseño personalizado", "Hasta 5 secciones", "Formulario de contacto"]
   },
   {
-    name: "Plan Presencia Plus",
-    price: "$380.000 ARS",
-    badge: "Plus",
+    name: "GROW",
+    subtitle: "Sitio Corporativo",
+    price: "$450.000 ARS",
+    badge: "Más elegido",
     highlighted: true,
     color: "text-rose",
     check: "text-rose",
     surface: "border-rose/45 bg-rose/8",
-    description: "Sitio completo para comercios y servicios.",
-    features: ["Varias secciones", "Galería o catálogo simple", "Diseño responsive", "Integración con redes", "Optimización visual"]
+    description: "Para empresas que quieren más secciones y presencia.",
+    features: ["Hasta 7 páginas", "Diseño a medida", "SEO básico incluido", "Integración con redes"]
   },
   {
-    name: "Plan Tienda Básica",
-    price: "$550.000 ARS",
-    badge: "Shop",
-    color: "text-amber",
-    check: "text-amber",
-    surface: "border-amber/28 bg-amber/8",
-    description: "Catálogo con carrito visual y consulta de compra.",
-    features: ["Catálogo de productos", "Carrito visual", "Categorías básicas", "Botón de compra o consulta", "Ideal para vender simple"]
-  },
-  {
-    name: "Plan Tienda Pro",
-    price: "$750.000 ARS",
-    badge: "Grow",
-    color: "text-coral",
-    check: "text-coral",
-    surface: "border-coral/30 bg-coral/8",
-    description: "Tienda más completa para negocios con más productos.",
-    features: ["Tienda más completa", "Categorías", "Carrito avanzado visual", "Panel simulado de pedidos", "Más productos y promociones"]
-  },
-  {
-    name: "Plan App Web / Sistema",
+    name: "SCALE",
+    subtitle: "Web App",
     price: "desde $950.000 ARS",
     badge: "Scale",
     color: "text-orchid",
     check: "text-orchid",
     surface: "border-orchid/30 bg-orchid/8",
-    description: "Web app o sistema interno para organizar procesos.",
-    features: ["Dashboard administrativo", "Gestión de datos", "Funciones a medida", "Panel interno", "Soporte prioritario"]
+    description: "Para proyectos que necesitan funcionalidades avanzadas.",
+    features: ["Aplicación web a medida", "Dashboard / Panel admin", "Base de datos", "Soporte prioritario"]
   }
 ];
 

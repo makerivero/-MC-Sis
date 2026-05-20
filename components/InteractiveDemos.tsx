@@ -84,11 +84,14 @@ export function InteractiveDemos() {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
+          <div className="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 xl:grid-cols-6">
             {demoScreens.map((demo) => (
-              <a key={demo.title} href="#demos-interactivos" className="group">
-                <div className="overflow-hidden rounded-lg border border-ink/10 bg-white p-2 shadow-[0_16px_40px_rgba(36,9,45,0.10)] transition group-hover:-translate-y-2">
-                  <Image src={demo.image} alt={demo.brand} width={360} height={620} className="h-52 w-full rounded-md object-cover object-top" />
+              <a key={demo.title} href="#demos-interactivos" className="group w-[170px] shrink-0 snap-start md:w-auto">
+                <div className="relative overflow-hidden rounded-[18px] border border-ink/10 bg-white p-2 shadow-[0_16px_40px_rgba(36,9,45,0.10)] transition group-hover:-translate-y-2 group-hover:scale-[1.03] group-hover:shadow-[0_26px_54px_rgba(36,9,45,0.18)]">
+                  <Image src={demo.image} alt={demo.brand} width={360} height={720} className="aspect-[9/16] w-full rounded-[14px] object-cover object-top" />
+                  <span className="absolute inset-2 flex items-center justify-center rounded-[14px] bg-[#16051f]/0 text-sm font-black uppercase text-white opacity-0 transition group-hover:bg-[#16051f]/55 group-hover:opacity-100">
+                    Ver demo
+                  </span>
                 </div>
                 <p className="mt-3 text-center text-[11px] font-black uppercase text-ink/72">{demo.title}</p>
               </a>

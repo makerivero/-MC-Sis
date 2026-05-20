@@ -15,6 +15,7 @@ const config: Config = {
         mint: "#63f6a7",
         violet: "#9b7cff",
         coral: "#ff8c6b",
+        magenta: "#ff2d87",
         amber: "#ffd166",
         rose: "#ff5c8a",
         lime: "#b8f35f",
