@@ -18,6 +18,7 @@ import {
   UtensilsCrossed,
   Wrench
 } from "lucide-react";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -112,60 +113,73 @@ export function InteractiveDemos() {
         <div className="mt-12 grid gap-6 xl:grid-cols-2">
           <DemoFrame demo={demos[0]}>
             <PhoneFrame title="Fuego Sur" subtitle="Restaurant · Palermo">
-              <div className="rounded-lg bg-gradient-to-br from-orange via-coral to-amber p-4 text-ink">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-sm font-bold uppercase">Mesa, take away y delivery</p>
-                    <h3 className="mt-2 text-3xl font-black leading-tight">Cocina de autor para pedir en 2 toques</h3>
-                  </div>
-                  <UtensilsCrossed className="h-9 w-9 shrink-0" />
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setReservedTable((value) => !value)}
-                  className="mt-4 rounded-lg bg-ink px-4 py-2 text-sm font-bold text-white"
-                >
-                  {reservedTable ? "Mesa reservada" : "Reservar mesa"}
-                </button>
-              </div>
-
-              <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
-                {(Object.keys(restaurantMenu) as Array<keyof typeof restaurantMenu>).map((tab) => (
-                  <button
-                    key={tab}
-                    type="button"
-                    onClick={() => setRestaurantTab(tab)}
-                    className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold ${
-                      restaurantTab === tab ? "bg-amber text-ink" : "bg-white/8 text-white/70"
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-
-              <div className="mt-4 space-y-3">
-                {currentRestaurantItems.map((item) => (
-                  <div key={item.name} className="flex items-center gap-3 rounded-lg bg-white/8 p-3">
-                    <div className="h-14 w-14 rounded-lg bg-gradient-to-br from-amber/80 to-coral/80" />
-                    <div className="min-w-0 flex-1">
-                      <p className="font-semibold text-white">{item.name}</p>
-                      <p className="text-xs text-amber">{item.tag}</p>
-                      <p className="text-sm text-white/60">${item.price.toLocaleString("es-AR")}</p>
+              <ScreenRail>
+                <div className="min-w-full">
+                  <ImageCard src="/demo-assets/restaurant.svg" alt="Restaurant con plato principal" />
+                  <div className="mt-3 rounded-lg bg-gradient-to-br from-orange via-coral to-amber p-4 text-ink">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-bold uppercase">Mesa, take away y delivery</p>
+                        <h3 className="mt-2 text-3xl font-black leading-tight">Cocina de autor para pedir en 2 toques</h3>
+                      </div>
+                      <UtensilsCrossed className="h-9 w-9 shrink-0" />
                     </div>
-                    <button type="button" onClick={() => setRestaurantCart((count) => count + 1)} className="rounded-lg bg-amber p-2 text-ink">
-                      <Plus className="h-4 w-4" />
+                    <button
+                      type="button"
+                      onClick={() => setReservedTable((value) => !value)}
+                      className="mt-4 rounded-lg bg-ink px-4 py-2 text-sm font-bold text-white"
+                    >
+                      {reservedTable ? "Mesa reservada" : "Reservar mesa"}
                     </button>
                   </div>
-                ))}
-              </div>
-
-              <div className="sticky bottom-0 mt-4 rounded-lg border border-amber/35 bg-ink/92 p-3 shadow-soft">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-white/70">{restaurantCart} items en pedido</span>
-                  <span className="font-bold text-amber">Enviar pedido</span>
                 </div>
-              </div>
+
+                <div className="min-w-full">
+                  <div className="rounded-lg bg-white/8 p-3">
+                    <div className="flex gap-2 overflow-x-auto pb-1">
+                      {(Object.keys(restaurantMenu) as Array<keyof typeof restaurantMenu>).map((tab) => (
+                        <button
+                          key={tab}
+                          type="button"
+                          onClick={() => setRestaurantTab(tab)}
+                          className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold ${
+                            restaurantTab === tab ? "bg-amber text-ink" : "bg-ink/60 text-white/70"
+                          }`}
+                        >
+                          {tab}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="mt-4 space-y-3">
+                      {currentRestaurantItems.map((item) => (
+                        <div key={item.name} className="flex items-center gap-3 rounded-lg bg-ink/60 p-3">
+                          <Image src="/demo-assets/restaurant.svg" alt="" width={56} height={56} className="h-14 w-14 rounded-lg object-cover" />
+                          <div className="min-w-0 flex-1">
+                            <p className="font-semibold text-white">{item.name}</p>
+                            <p className="text-xs text-amber">{item.tag}</p>
+                            <p className="text-sm text-white/60">${item.price.toLocaleString("es-AR")}</p>
+                          </div>
+                          <button type="button" onClick={() => setRestaurantCart((count) => count + 1)} className="rounded-lg bg-amber p-2 text-ink">
+                            <Plus className="h-4 w-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="min-w-full">
+                  <div className="rounded-lg border border-amber/35 bg-ink/92 p-4 shadow-soft">
+                    <p className="text-sm text-white/58">Resumen del pedido</p>
+                    <div className="mt-4 space-y-3">
+                      <div className="flex justify-between text-white"><span>Sorrentinos</span><span>$9.800</span></div>
+                      <div className="flex justify-between text-white"><span>Bife con papas</span><span>$12.800</span></div>
+                      <div className="flex justify-between text-amber"><span>{restaurantCart} items</span><span>Enviar pedido</span></div>
+                    </div>
+                  </div>
+                </div>
+              </ScreenRail>
             </PhoneFrame>
           </DemoFrame>
 
@@ -173,6 +187,7 @@ export function InteractiveDemos() {
             <BrowserShell title="Estudio Norte">
               <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="rounded-lg bg-lime/12 p-4">
+                  <ImageCard src="/demo-assets/accounting.svg" alt="Panel visual para estudio contable" />
                   <Calculator className="h-8 w-8 text-lime" />
                   <h3 className="mt-4 text-2xl font-bold text-white">Consulta contable guiada</h3>
                   <p className="mt-2 text-sm leading-6 text-white/62">El cliente elige su situación y la web arma una lista clara de próximos pasos.</p>
@@ -220,59 +235,74 @@ export function InteractiveDemos() {
 
           <DemoFrame demo={demos[2]}>
             <PhoneFrame title="Salud Viva" subtitle="Obra social · Credencial digital">
-              <div className="rounded-lg bg-gradient-to-br from-rose via-orchid to-steel p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-white/78">Plan activo</p>
-                    <h3 className="text-3xl font-black text-white">{healthPlan}</h3>
+              <ScreenRail>
+                <div className="min-w-full">
+                  <ImageCard src="/demo-assets/health.svg" alt="Credencial digital de salud" />
+                  <div className="mt-3 rounded-lg bg-gradient-to-br from-rose via-orchid to-steel p-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-white/78">Plan activo</p>
+                        <h3 className="text-3xl font-black text-white">{healthPlan}</h3>
+                      </div>
+                      <HeartPulse className="h-10 w-10 text-white" />
+                    </div>
+                    <p className="mt-5 text-2xl font-bold text-white">{selectedHealthPlan.price}</p>
+                    <p className="text-sm text-white/72">Cobertura mensual estimada</p>
                   </div>
-                  <HeartPulse className="h-10 w-10 text-white" />
                 </div>
-                <p className="mt-5 text-2xl font-bold text-white">{selectedHealthPlan.price}</p>
-                <p className="text-sm text-white/72">Cobertura mensual estimada</p>
-              </div>
 
-              <div className="mt-4 grid grid-cols-3 gap-2">
-                {(Object.keys(healthPlans) as Array<keyof typeof healthPlans>).map((plan) => (
-                  <button
-                    key={plan}
-                    type="button"
-                    onClick={() => {
-                      setHealthPlan(plan);
-                      setHealthRequested(false);
-                    }}
-                    className={`rounded-lg py-2 text-sm font-bold ${healthPlan === plan ? "bg-rose text-white" : "bg-white/8 text-white/62"}`}
-                  >
-                    {plan}
+                <div className="min-w-full">
+                  <div className="grid grid-cols-3 gap-2">
+                    {(Object.keys(healthPlans) as Array<keyof typeof healthPlans>).map((plan) => (
+                      <button
+                        key={plan}
+                        type="button"
+                        onClick={() => {
+                          setHealthPlan(plan);
+                          setHealthRequested(false);
+                        }}
+                        className={`rounded-lg py-2 text-sm font-bold ${healthPlan === plan ? "bg-rose text-white" : "bg-white/8 text-white/62"}`}
+                      >
+                        {plan}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 rounded-lg bg-white/8 p-4">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-white/64">Cobertura</span>
+                      <span className="font-bold text-rose">{selectedHealthPlan.coverage}%</span>
+                    </div>
+                    <div className="mt-2 h-2 rounded-full bg-white/10">
+                      <div className="h-2 rounded-full bg-gradient-to-r from-rose to-orchid" style={{ width: `${selectedHealthPlan.coverage}%` }} />
+                    </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {selectedHealthPlan.perks.map((perk) => (
+                        <button key={perk} type="button" onClick={() => setSpecialty(perk)} className={`rounded-lg px-3 py-2 text-xs font-semibold ${specialty === perk ? "bg-orchid text-white" : "bg-ink/60 text-white/62"}`}>
+                          {perk}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="min-w-full">
+                  <button type="button" onClick={() => setHealthRequested(true)} className="w-full rounded-lg bg-rose px-4 py-3 font-bold text-white">
+                    {healthRequested ? `Turno solicitado: ${specialty}` : "Solicitar turno"}
                   </button>
-                ))}
-              </div>
-
-              <div className="mt-4 rounded-lg bg-white/8 p-4">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-white/64">Cobertura</span>
-                  <span className="font-bold text-rose">{selectedHealthPlan.coverage}%</span>
+                  <div className="mt-4 rounded-lg bg-white/8 p-4">
+                    <p className="text-sm text-white/62">Próxima disponibilidad</p>
+                    <p className="mt-2 text-2xl font-bold text-white">Jueves 16:30</p>
+                    <p className="text-sm text-rose">{specialty}</p>
+                  </div>
                 </div>
-                <div className="mt-2 h-2 rounded-full bg-white/10">
-                  <div className="h-2 rounded-full bg-gradient-to-r from-rose to-orchid" style={{ width: `${selectedHealthPlan.coverage}%` }} />
-                </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {selectedHealthPlan.perks.map((perk) => (
-                    <button key={perk} type="button" onClick={() => setSpecialty(perk)} className={`rounded-lg px-3 py-2 text-xs font-semibold ${specialty === perk ? "bg-orchid text-white" : "bg-ink/60 text-white/62"}`}>
-                      {perk}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <button type="button" onClick={() => setHealthRequested(true)} className="mt-4 w-full rounded-lg bg-rose px-4 py-3 font-bold text-white">
-                {healthRequested ? `Turno solicitado: ${specialty}` : "Solicitar turno"}
-              </button>
+              </ScreenRail>
             </PhoneFrame>
           </DemoFrame>
 
           <DemoFrame demo={demos[3]}>
             <PhoneFrame title="Accesorios Glow" subtitle="Tienda mobile">
+              <ImageCard src="/demo-assets/accessories.svg" alt="Accesorios para celular" />
               <div className="rounded-lg bg-gradient-to-br from-violet via-orchid to-coral p-4">
                 <p className="text-sm font-bold text-white/82">Combo destacado</p>
                 <h3 className="mt-2 text-3xl font-black text-white">Funda + vidrio + cargador</h3>
@@ -326,6 +356,7 @@ export function InteractiveDemos() {
             <BrowserShell title="FixLab Servicio Técnico">
               <div className="grid gap-4 lg:grid-cols-[1fr_1.1fr]">
                 <div className="rounded-lg bg-orange/12 p-4">
+                  <ImageCard src="/demo-assets/repair.svg" alt="Servicio técnico y reparación" />
                   <Wrench className="h-8 w-8 text-orange" />
                   <h3 className="mt-4 text-2xl font-bold text-white">Seguimiento de reparación</h3>
                   <div className="mt-5 grid grid-cols-3 gap-2">
@@ -364,6 +395,7 @@ export function InteractiveDemos() {
             <BrowserShell title="Mayorista Centro">
               <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="rounded-lg bg-aqua/10 p-4">
+                  <ImageCard src="/demo-assets/wholesale.svg" alt="Depósito mayorista con stock" />
                   <PackageCheck className="h-8 w-8 text-aqua" />
                   <h3 className="mt-4 text-2xl font-bold text-white">Stock y pedidos internos</h3>
                   <div className="mt-5 grid grid-cols-2 gap-3">
@@ -482,6 +514,25 @@ function BrowserShell({ title, children }: { title: string; children: ReactNode 
         </div>
       </div>
       <div className="p-4">{children}</div>
+    </div>
+  );
+}
+
+function ScreenRail({ children }: { children: ReactNode }) {
+  return (
+    <div>
+      <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-3">
+        {children}
+      </div>
+      <p className="text-center text-xs font-semibold text-white/42">Arrastrá para ver más pantallas</p>
+    </div>
+  );
+}
+
+function ImageCard({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="mb-4 overflow-hidden rounded-lg border border-white/10 bg-white/8">
+      <Image src={src} alt={alt} width={900} height={620} className="h-44 w-full object-cover" />
     </div>
   );
 }

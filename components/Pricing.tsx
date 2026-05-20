@@ -32,6 +32,12 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
+              <a
+                href="#contacto"
+                className={`mt-6 inline-flex w-full items-center justify-center rounded-lg border border-white/10 bg-ink/70 px-4 py-3 text-sm font-bold transition hover:bg-white hover:text-ink ${plan.color}`}
+              >
+                Solicitar
+              </a>
             </article>
           ))}
         </div>
