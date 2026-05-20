@@ -158,14 +158,14 @@ export function InteractiveDemos() {
 
 function PhoneMask({ image, title }: { image: string; title: string }) {
   return (
-    <div className="mx-auto w-full max-w-[260px] rounded-[2rem] border border-white/18 bg-black p-2.5 shadow-soft">
+    <div className="mx-auto w-full max-w-[240px] rounded-[2rem] border border-white/18 bg-black p-2.5 shadow-soft">
       <div className="rounded-[1.5rem] bg-ink p-2.5">
         <div className="mb-2 flex items-center justify-between px-2">
           <span className="text-[10px] font-bold text-white/54">{title}</span>
           <span className="h-3 w-16 rounded-full bg-white/14" />
         </div>
-        <div className="relative h-[500px] overflow-y-auto rounded-[1.1rem] bg-white overscroll-contain demo-phone-scroll">
-          <Image src={image} alt={`Demo mobile de ${title}`} width={900} height={2400} sizes="260px" className="h-auto w-full" />
+        <div className="relative h-[260px] overflow-y-auto rounded-[1.1rem] bg-white overscroll-contain demo-phone-scroll md:h-[280px]">
+          <Image src={image} alt={`Demo mobile de ${title}`} width={900} height={2400} sizes="240px" className="h-auto w-full" />
         </div>
         <p className="mt-2 text-center text-[11px] font-semibold text-white/38">Deslizá dentro del celular</p>
       </div>
