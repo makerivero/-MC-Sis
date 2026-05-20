@@ -22,7 +22,8 @@ export const contactEmail = "makerivero@gmail.com";
 
 export const navItems = [
   { label: "Inicio", href: "#inicio" },
-  { label: "Demos", href: "#demos" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Portfolio", href: "#demos" },
   { label: "Planes", href: "#planes" },
   { label: "Proceso", href: "#proceso" },
   { label: "Contacto", href: "#contacto" }
@@ -89,90 +90,62 @@ export const plans = [
   {
     name: "Plan Inicial",
     price: "$250.000 ARS",
-    badge: "Entrada",
-    color: "text-amber",
-    check: "text-amber",
-    surface: "border-amber/24 bg-amber/8",
-    description: "Ideal para presentar un negocio con una web clara y profesional.",
-    features: [
-      "Landing page profesional",
-      "Diseño responsive",
-      "Secciones básicas",
-      "Botón de contacto",
-      "Ideal para presentar un negocio"
-    ]
+    badge: "Start",
+    color: "text-lime",
+    check: "text-lime",
+    surface: "border-white/12 bg-white/6",
+    description: "Sitio one page para presencia digital rápida.",
+    features: ["One page", "Diseño personalizado", "Hasta 5 secciones", "Formulario de contacto", "Optimización SEO básica"]
   },
   {
     name: "Plan Presencia Plus",
     price: "$380.000 ARS",
-    badge: "Más pedido",
+    badge: "Plus",
     highlighted: true,
-    color: "text-mint",
-    check: "text-mint",
-    surface: "border-mint/36 bg-mint/10",
-    description: "Para comercios y servicios que necesitan más contenido y mejor presencia.",
-    features: [
-      "Página más completa",
-      "Varias secciones",
-      "Galería o catálogo simple",
-      "Optimización visual",
-      "Ideal para comercios y servicios"
-    ]
+    color: "text-rose",
+    check: "text-rose",
+    surface: "border-rose/45 bg-rose/8",
+    description: "Sitio completo para comercios y servicios.",
+    features: ["Varias secciones", "Galería o catálogo simple", "Diseño responsive", "Integración con redes", "Optimización visual"]
   },
   {
     name: "Plan Tienda Básica",
     price: "$550.000 ARS",
-    badge: "Venta simple",
-    color: "text-coral",
-    check: "text-coral",
-    surface: "border-coral/30 bg-coral/9",
-    description: "Para mostrar productos y recibir consultas de compra sin sistema complejo.",
-    features: [
-      "Catálogo de productos",
-      "Carrito visual",
-      "Botón de compra o consulta",
-      "Ideal para vender productos sin sistema complejo"
-    ]
+    badge: "Shop",
+    color: "text-amber",
+    check: "text-amber",
+    surface: "border-amber/28 bg-amber/8",
+    description: "Catálogo con carrito visual y consulta de compra.",
+    features: ["Catálogo de productos", "Carrito visual", "Categorías básicas", "Botón de compra o consulta", "Ideal para vender simple"]
   },
   {
     name: "Plan Tienda Pro",
     price: "$750.000 ARS",
-    badge: "Escalable",
-    color: "text-orchid",
-    check: "text-orchid",
-    surface: "border-orchid/30 bg-orchid/9",
-    description: "Para negocios con más productos, categorías y una experiencia más completa.",
-    features: [
-      "Tienda más completa",
-      "Categorías",
-      "Carrito avanzado visual",
-      "Panel simulado de pedidos",
-      "Ideal para negocios con más productos"
-    ]
+    badge: "Grow",
+    color: "text-coral",
+    check: "text-coral",
+    surface: "border-coral/30 bg-coral/8",
+    description: "Tienda más completa para negocios con más productos.",
+    features: ["Tienda más completa", "Categorías", "Carrito avanzado visual", "Panel simulado de pedidos", "Más productos y promociones"]
   },
   {
     name: "Plan App Web / Sistema",
     price: "desde $950.000 ARS",
-    badge: "A medida",
-    color: "text-aqua",
-    check: "text-aqua",
-    surface: "border-aqua/30 bg-aqua/9",
-    description: "Para organizar procesos internos con un sistema web propio.",
-    features: [
-      "Dashboard administrativo",
-      "Gestión de datos",
-      "Funciones a medida",
-      "Ideal para negocios que necesitan organizar procesos internos"
-    ]
+    badge: "Scale",
+    color: "text-orchid",
+    check: "text-orchid",
+    surface: "border-orchid/30 bg-orchid/8",
+    description: "Web app o sistema interno para organizar procesos.",
+    features: ["Dashboard administrativo", "Gestión de datos", "Funciones a medida", "Panel interno", "Soporte prioritario"]
   }
 ];
 
 export const services = [
-  { title: "Páginas institucionales", icon: BriefcaseBusiness, color: "text-amber bg-amber/10" },
-  { title: "Landing pages", icon: Rocket, color: "text-coral bg-coral/10" },
-  { title: "Tiendas online", icon: CreditCard, color: "text-orchid bg-orchid/10" },
-  { title: "Catálogos digitales", icon: Boxes, color: "text-lime bg-lime/10" },
-  { title: "Sistemas de turnos", icon: CalendarClock, color: "text-rose bg-rose/10" },
+  { title: "Páginas institucionales", icon: BriefcaseBusiness, color: "text-rose bg-rose/10" },
+  { title: "Landing pages", icon: Rocket, color: "text-lime bg-lime/10" },
+  { title: "Tiendas online", icon: CreditCard, color: "text-amber bg-amber/10" },
+  { title: "Catálogos digitales", icon: Boxes, color: "text-coral bg-coral/10" },
+  { title: "Sistemas de turnos", icon: CalendarClock, color: "text-orchid bg-orchid/10" },
   { title: "Dashboards administrativos", icon: BarChart3, color: "text-aqua bg-aqua/10" },
   { title: "Apps web internas", icon: MonitorSmartphone, color: "text-steel bg-steel/10" },
   { title: "Sitios para profesionales", icon: FileText, color: "text-mint bg-mint/10" },
@@ -180,18 +153,17 @@ export const services = [
 ];
 
 export const processSteps = [
-  "Relevamos la idea",
-  "Definimos estructura y funciones",
-  "Creamos una primera versión visual",
-  "Ajustamos diseño y contenido",
-  "Publicamos en Vercel",
-  "Dejamos lista la web para compartir"
+  "Descubrimos",
+  "Diseñamos",
+  "Desarrollamos",
+  "Lanzamos",
+  "Acompañamos"
 ];
 
 export const proofPoints = [
-  { title: "Enfoque comercial", text: "Cada sección se piensa para explicar, convencer y facilitar el contacto." },
-  { title: "Diseño responsive", text: "La experiencia se adapta a celular, tablet y escritorio desde el inicio." },
-  { title: "Base editable", text: "Textos, precios, planes y demos quedan ordenados para crecer sin rehacer todo." }
+  { title: "Diseño que destaca", text: "Sitios únicos que reflejan tu marca y conectan con tu público." },
+  { title: "Rendimiento real", text: "Velocidad, SEO y código optimizado para publicar sin vueltas." },
+  { title: "Adaptado a todo", text: "Experiencia perfecta en celular, tablet y escritorio." }
 ];
 
 export const dashboardRows = [

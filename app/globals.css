@@ -57,6 +57,14 @@ textarea {
   background: rgba(255, 209, 102, 0.34);
 }
 
+.display-title {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.94;
+  text-transform: uppercase;
+}
+
 .demo-phone-scroll {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 92, 138, 0.65) rgba(255, 255, 255, 0.12);

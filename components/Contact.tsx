@@ -2,7 +2,6 @@
 
 import { Mail, Send } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { SectionHeading } from "@/components/SectionHeading";
 import { contactEmail } from "@/lib/data";
 
 export function Contact() {
@@ -14,95 +13,52 @@ export function Contact() {
   };
 
   return (
-    <section id="contacto" className="px-5 py-20 md:px-8 md:py-28">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+    <section id="contacto" className="bg-[#fff6ea] px-5 py-14 text-ink md:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
         <div>
-          <SectionHeading
-            eyebrow="Contacto"
-            title="¿Querés cotizar tu página o app web?"
-            description="Contanos qué necesitás crear y te respondemos con una orientación de alcance, tiempos y presupuesto."
-          />
-          <div className="mt-8 rounded-lg border border-rose/24 bg-gradient-to-br from-rose/12 via-amber/8 to-orchid/10 p-5">
-            <p className="text-sm font-semibold uppercase text-rose">Email</p>
-            <a href={`mailto:${contactEmail}`} className="mt-2 inline-flex items-center gap-2 text-2xl font-semibold text-white transition hover:text-amber">
-              <Mail className="h-5 w-5" />
-              {contactEmail}
-            </a>
-          </div>
-          <a
-            href={`mailto:${contactEmail}?subject=Consulta%20para%20cotizar%20web%20o%20app`}
-            className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-rose px-6 py-3 font-semibold text-white transition hover:bg-amber hover:text-ink"
-          >
-            <Send className="h-4 w-4" />
-            Escribir por email
-          </a>
+          <h2 className="text-3xl font-black leading-tight md:text-4xl">¿Listo para llevar tu negocio al siguiente nivel?</h2>
+          <p className="mt-4 text-sm leading-6 text-ink/64">Escribinos y contanos tu proyecto. Te respondemos rápido.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="rounded-lg border border-white/10 bg-white/7 p-5 shadow-soft backdrop-blur-xl md:p-6">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="grid gap-2 text-sm font-medium text-white/78">
-              Nombre
-              <input
-                name="name"
-                type="text"
-                required
-                placeholder="Tu nombre o marca"
-                className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition placeholder:text-white/32 focus:border-amber"
-              />
-            </label>
-            <label className="grid gap-2 text-sm font-medium text-white/78">
-              Tipo de proyecto
-              <select
-                name="projectType"
-                className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition focus:border-amber"
-                defaultValue="Landing page"
-              >
+        <div className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
+          <a
+            href={`mailto:${contactEmail}?subject=Consulta%20para%20cotizar%20web%20o%20app`}
+            className="inline-flex items-center gap-4 rounded-lg border border-rose/20 bg-white p-4 shadow-[0_14px_34px_rgba(36,9,45,0.08)]"
+          >
+            <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-gradient-to-br from-rose to-orange text-white">
+              <Mail className="h-6 w-6" />
+            </span>
+            <span className="min-w-0">
+              <span className="block text-xs font-bold uppercase text-ink/48">Email</span>
+              <span className="block truncate text-xl font-black text-ink">{contactEmail}</span>
+            </span>
+          </a>
+
+          <form onSubmit={handleSubmit} className="rounded-lg border border-ink/10 bg-white p-4 shadow-[0_14px_34px_rgba(36,9,45,0.08)]">
+            <div className="grid gap-3 md:grid-cols-2">
+              <input name="name" type="text" required placeholder="Nombre" className="rounded-lg border border-ink/10 bg-[#fff9f1] px-4 py-3 text-ink outline-none focus:border-rose" />
+              <select name="projectType" className="rounded-lg border border-ink/10 bg-[#fff9f1] px-4 py-3 text-ink outline-none focus:border-rose" defaultValue="Landing page">
                 <option>Landing page</option>
                 <option>Tienda online</option>
                 <option>Catálogo digital</option>
                 <option>Sistema de turnos</option>
                 <option>App web / sistema</option>
               </select>
-            </label>
-          </div>
-
-          <label className="mt-4 grid gap-2 text-sm font-medium text-white/78">
-            Presupuesto estimado
-            <select
-              name="budget"
-              className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition focus:border-amber"
-              defaultValue="$250.000 a $380.000 ARS"
-            >
-              <option>$250.000 a $380.000 ARS</option>
-              <option>$380.000 a $550.000 ARS</option>
-              <option>$550.000 a $750.000 ARS</option>
-              <option>Más de $950.000 ARS</option>
-              <option>Necesito orientación</option>
-            </select>
-          </label>
-
-          <label className="mt-4 grid gap-2 text-sm font-medium text-white/78">
-            Mensaje
+            </div>
             <textarea
               name="message"
               required
-              rows={5}
-              placeholder="Contanos qué vendés, qué secciones necesitás o qué sistema querés crear."
-              className="resize-none rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition placeholder:text-white/32 focus:border-amber"
+              rows={3}
+              placeholder="Contanos qué vendés y qué necesitás crear."
+              className="mt-3 w-full resize-none rounded-lg border border-ink/10 bg-[#fff9f1] px-4 py-3 text-ink outline-none focus:border-rose"
             />
-          </label>
-
-          <button type="submit" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber px-6 py-3 font-semibold text-ink transition hover:bg-rose hover:text-white">
-            <Send className="h-4 w-4" />
-            Preparar consulta
-          </button>
-
-          {sent ? (
-            <div className="mt-5 rounded-lg border border-lime/35 bg-lime/12 p-4 text-sm font-medium text-lime">
-              Consulta preparada. Podés escribirnos a {contactEmail}
-            </div>
-          ) : null}
-        </form>
+            <button type="submit" className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#24092d] px-6 py-3 font-black text-white transition hover:bg-rose">
+              <Send className="h-4 w-4" />
+              Preparar consulta
+            </button>
+            {sent ? <div className="mt-3 rounded-lg bg-lime/20 p-3 text-sm font-bold text-ink">Consulta preparada. Podés escribirnos a {contactEmail}</div> : null}
+          </form>
+        </div>
       </div>
     </section>
   );
