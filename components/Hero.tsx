@@ -5,9 +5,9 @@ import { contactEmail } from "@/lib/data";
 export function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden bg-[#16051f] px-5 pb-16 pt-28 md:px-12 md:pb-20 md:pt-36 xl:px-[72px]">
-      <div className="absolute right-[-6%] top-20 hidden h-[430px] w-[46vw] rounded-bl-[34%] rounded-tl-[18%] bg-[radial-gradient(circle_at_70%_24%,rgba(216,255,0,0.28),transparent_15%),linear-gradient(135deg,#ff2d87,#ff5a3d,#ff9f1c)] opacity-88 lg:block" />
+      <div className="absolute right-[14%] top-32 hidden h-32 w-32 rounded-full bg-[#ff4f5f]/16 blur-3xl lg:block" />
       <div className="absolute right-[9%] top-40 hidden h-5 w-5 rounded-full bg-[#d8ff00] md:block" />
-      <div className="absolute right-[4%] top-80 hidden h-16 w-16 rounded-full bg-[#d8ff00] opacity-90 md:block" />
+      <div className="absolute right-[6%] top-80 hidden h-12 w-12 rounded-full bg-[#d8ff00] opacity-70 md:block" />
       <div className="absolute left-[54%] top-72 hidden h-24 w-24 bg-[radial-gradient(circle,#ff2d87_2px,transparent_3px)] bg-[length:16px_16px] opacity-45 lg:block" />
 
       <div className="relative mx-auto grid min-h-[620px] max-w-7xl items-center gap-12 lg:grid-cols-2">

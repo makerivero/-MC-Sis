@@ -1,4 +1,4 @@
-import { BadgeDollarSign, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { plans } from "@/lib/data";
 
 export function Pricing() {
@@ -64,18 +64,6 @@ export function Pricing() {
             ))}
           </div>
 
-          <aside className="grid gap-5 rounded-[24px] border border-white/12 bg-white/10 p-6 shadow-soft backdrop-blur-xl sm:grid-cols-[auto_1fr_auto] sm:items-center sm:text-left">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff2d87] to-[#ff8a24] text-white">
-              <BadgeDollarSign className="h-8 w-8" />
-            </div>
-            <div className="text-center sm:text-left">
-              <h3 className="text-lg font-black uppercase text-white">Financiación a medida</h3>
-              <p className="mt-2 text-sm leading-6 text-white/66">Consultanos por planes de pago y cuotas para adaptar el proyecto a tu etapa.</p>
-            </div>
-            <a href="#contacto" className="btn-gradient inline-flex justify-center px-5 py-3 text-sm font-black">
-              CONSULTAR
-            </a>
-          </aside>
         </div>
       </div>
     </section>
