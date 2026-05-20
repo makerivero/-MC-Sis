@@ -5,10 +5,10 @@ import { contactEmail } from "@/lib/data";
 export function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden bg-[#16051f] px-5 pb-16 pt-28 md:px-12 md:pb-20 md:pt-36 xl:px-[72px]">
-      <div className="absolute right-[-8%] top-0 h-[520px] w-[52vw] rounded-bl-[38%] rounded-tl-[22%] bg-[radial-gradient(circle_at_65%_28%,rgba(255,209,102,0.34),transparent_18%),linear-gradient(135deg,#ff2d87,#ff5a3d,#ff9f1c)] opacity-95" />
-      <div className="absolute right-[8%] top-36 hidden h-5 w-5 rounded-full bg-[#d8ff00] md:block" />
-      <div className="absolute right-[4%] top-72 hidden h-20 w-20 rounded-full bg-[#d8ff00] opacity-90 md:block" />
-      <div className="absolute left-[55%] top-64 hidden h-24 w-24 bg-[radial-gradient(circle,#ff2d87_2px,transparent_3px)] bg-[length:16px_16px] opacity-55 lg:block" />
+      <div className="absolute right-[-6%] top-20 hidden h-[430px] w-[46vw] rounded-bl-[34%] rounded-tl-[18%] bg-[radial-gradient(circle_at_70%_24%,rgba(216,255,0,0.28),transparent_15%),linear-gradient(135deg,#ff2d87,#ff5a3d,#ff9f1c)] opacity-88 lg:block" />
+      <div className="absolute right-[9%] top-40 hidden h-5 w-5 rounded-full bg-[#d8ff00] md:block" />
+      <div className="absolute right-[4%] top-80 hidden h-16 w-16 rounded-full bg-[#d8ff00] opacity-90 md:block" />
+      <div className="absolute left-[54%] top-72 hidden h-24 w-24 bg-[radial-gradient(circle,#ff2d87_2px,transparent_3px)] bg-[length:16px_16px] opacity-45 lg:block" />
 
       <div className="relative mx-auto grid min-h-[620px] max-w-7xl items-center gap-12 lg:grid-cols-2">
         <div>
@@ -16,7 +16,7 @@ export function Hero() {
             Diseño • Desarrollo • Resultados
           </div>
 
-          <h1 className="display-title max-w-4xl text-[48px] text-[#fff9f0] sm:text-[58px] md:text-[76px] xl:text-[88px]">
+          <h1 className="display-title max-w-[700px] text-[42px] text-[#fff9f0] sm:text-[52px] md:text-[64px] xl:text-[74px]">
             Creamos páginas web
             <br />y <span className="bg-gradient-to-r from-[#ff2d87] via-[#ff4f5f] to-[#ff8a24] bg-clip-text text-transparent">web apps</span>
             <br />que hacen crecer
@@ -57,7 +57,7 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative rounded-[36px] bg-[#fff7ea] p-6 text-[#1d1026] shadow-[0_40px_100px_rgba(0,0,0,0.34)] md:p-8">
+          <div className="relative rounded-[32px] bg-[#fff7ea] p-5 text-[#1d1026] shadow-[0_40px_100px_rgba(0,0,0,0.34)] md:p-7">
             <div className="mb-6 flex justify-center gap-6 text-[10px] font-black uppercase text-[#66586f]">
               <span>Diseño</span>
               <span>Desarrollo</span>

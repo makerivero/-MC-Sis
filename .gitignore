@@ -10,3 +10,4 @@ dist
 tsconfig.tsbuildinfo
 *.log
 .env*
+public/demo-screens/swap-*.png

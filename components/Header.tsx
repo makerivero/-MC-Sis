@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { contactEmail, navItems } from "@/lib/data";
 
@@ -8,11 +9,17 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-[#16051f]/82 backdrop-blur-2xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#16051f]/88 backdrop-blur-2xl">
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-12 xl:px-[72px]">
-        <a href="#inicio" className="flex items-center gap-3" aria-label="MC-Sis inicio">
-          <span className="display-title bg-gradient-to-br from-magenta via-coral to-orange bg-clip-text text-4xl text-transparent">MC</span>
-          <span className="text-2xl font-black text-[#fff9f0]">MC-Sis</span>
+        <a href="#inicio" className="flex items-center" aria-label="MC-Sis inicio">
+          <Image
+            src="/demo-screens/mc-sis-logo-clean.png"
+            alt="MC-Sis"
+            width={170}
+            height={57}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </a>
 
         <div className="hidden items-center gap-8 lg:flex">

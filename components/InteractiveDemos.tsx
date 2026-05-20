@@ -4,7 +4,6 @@ import Image from "next/image";
 import {
   ChefHat,
   Laptop,
-  MonitorSmartphone,
   ReceiptText,
   ShoppingBag,
   Smartphone,
@@ -114,8 +113,7 @@ export function InteractiveDemos() {
               {[
                 { icon: Smartphone, text: "Mobile" },
                 { icon: TabletSmartphone, text: "Tablet" },
-                { icon: Laptop, text: "Desktop" },
-                { icon: MonitorSmartphone, text: "Paneles" }
+                { icon: Laptop, text: "Desktop" }
               ].map((item) => (
                 <span key={item.text} className="inline-flex items-center gap-2 rounded-lg bg-white/8 px-4 py-2 text-sm font-bold text-white/72">
                   <item.icon className="h-4 w-4 text-lime" />
