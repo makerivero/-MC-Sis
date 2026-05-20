@@ -4,15 +4,18 @@ import {
   Boxes,
   BriefcaseBusiness,
   CalendarClock,
+  ChefHat,
   CreditCard,
   FileText,
   LayoutDashboard,
   MonitorSmartphone,
-  PanelsTopLeft,
+  ReceiptText,
   Rocket,
   ShoppingBag,
+  Stethoscope,
   Store,
-  UsersRound
+  UsersRound,
+  Wrench
 } from "lucide-react";
 
 export const contactEmail = "makerivero@gmail.com";
@@ -33,40 +36,52 @@ export const heroMetrics = [
 
 export const demos = [
   {
-    id: "local",
-    title: "Landing para comercio local",
-    description: "Portada, servicios, horarios y llamado directo a WhatsApp.",
-    icon: Store
+    id: "restaurant",
+    title: "Restaurant y delivery",
+    description: "Menú mobile, categorías, reserva rápida y pedido visual.",
+    icon: ChefHat,
+    accent: "from-orange/28 via-coral/20 to-amber/18",
+    iconClass: "text-amber bg-orange/16 border-orange/28"
   },
   {
-    id: "shop",
-    title: "Tienda online simple",
-    description: "Productos, precios, carrito visual y compras por consulta.",
-    icon: ShoppingBag
+    id: "accounting",
+    title: "Estudio contable",
+    description: "Servicios, turnos, consulta guiada y documentos requeridos.",
+    icon: ReceiptText,
+    accent: "from-lime/20 via-mint/14 to-steel/18",
+    iconClass: "text-lime bg-lime/12 border-lime/28"
   },
   {
-    id: "booking",
-    title: "Sistema de turnos",
-    description: "Horarios disponibles, selección de turno y reserva visual.",
-    icon: CalendarClock
+    id: "health",
+    title: "Obra social o salud",
+    description: "Planes, cobertura, credencial visual y solicitud de turno.",
+    icon: Stethoscope,
+    accent: "from-rose/22 via-orchid/16 to-aqua/12",
+    iconClass: "text-rose bg-rose/12 border-rose/30"
   },
   {
-    id: "dashboard",
-    title: "Dashboard administrativo",
-    description: "Ventas, pedidos, clientes y métricas para decidir mejor.",
-    icon: LayoutDashboard
+    id: "accessories",
+    title: "Venta de accesorios",
+    description: "Tienda mobile con variantes, carrito y combos destacados.",
+    icon: ShoppingBag,
+    accent: "from-violet/24 via-steel/16 to-coral/14",
+    iconClass: "text-violet bg-violet/14 border-violet/32"
   },
   {
-    id: "catalog",
-    title: "Catálogo digital",
-    description: "Categorías, filtros y productos sin tienda completa.",
-    icon: Boxes
+    id: "repair",
+    title: "Servicio de reparación",
+    description: "Ingreso de equipo, estado del trabajo y presupuesto visual.",
+    icon: Wrench,
+    accent: "from-amber/22 via-orange/16 to-mint/12",
+    iconClass: "text-orange bg-orange/14 border-orange/30"
   },
   {
-    id: "custom",
-    title: "App web personalizada",
-    description: "Paneles internos, tareas, estados y gestión a medida.",
-    icon: PanelsTopLeft
+    id: "wholesale",
+    title: "Mayorista con stock",
+    description: "Inventario, alertas, pedidos y control interno de productos.",
+    icon: LayoutDashboard,
+    accent: "from-aqua/16 via-lime/16 to-amber/16",
+    iconClass: "text-aqua bg-aqua/12 border-aqua/28"
   }
 ] as const;
 
@@ -75,6 +90,9 @@ export const plans = [
     name: "Plan Inicial",
     price: "$250.000 ARS",
     badge: "Entrada",
+    color: "text-amber",
+    check: "text-amber",
+    surface: "border-amber/24 bg-amber/8",
     description: "Ideal para presentar un negocio con una web clara y profesional.",
     features: [
       "Landing page profesional",
@@ -89,6 +107,9 @@ export const plans = [
     price: "$380.000 ARS",
     badge: "Más pedido",
     highlighted: true,
+    color: "text-mint",
+    check: "text-mint",
+    surface: "border-mint/36 bg-mint/10",
     description: "Para comercios y servicios que necesitan más contenido y mejor presencia.",
     features: [
       "Página más completa",
@@ -102,6 +123,9 @@ export const plans = [
     name: "Plan Tienda Básica",
     price: "$550.000 ARS",
     badge: "Venta simple",
+    color: "text-coral",
+    check: "text-coral",
+    surface: "border-coral/30 bg-coral/9",
     description: "Para mostrar productos y recibir consultas de compra sin sistema complejo.",
     features: [
       "Catálogo de productos",
@@ -114,6 +138,9 @@ export const plans = [
     name: "Plan Tienda Pro",
     price: "$750.000 ARS",
     badge: "Escalable",
+    color: "text-orchid",
+    check: "text-orchid",
+    surface: "border-orchid/30 bg-orchid/9",
     description: "Para negocios con más productos, categorías y una experiencia más completa.",
     features: [
       "Tienda más completa",
@@ -127,6 +154,9 @@ export const plans = [
     name: "Plan App Web / Sistema",
     price: "desde $950.000 ARS",
     badge: "A medida",
+    color: "text-aqua",
+    check: "text-aqua",
+    surface: "border-aqua/30 bg-aqua/9",
     description: "Para organizar procesos internos con un sistema web propio.",
     features: [
       "Dashboard administrativo",
@@ -138,15 +168,15 @@ export const plans = [
 ];
 
 export const services = [
-  { title: "Páginas institucionales", icon: BriefcaseBusiness },
-  { title: "Landing pages", icon: Rocket },
-  { title: "Tiendas online", icon: CreditCard },
-  { title: "Catálogos digitales", icon: Boxes },
-  { title: "Sistemas de turnos", icon: CalendarClock },
-  { title: "Dashboards administrativos", icon: BarChart3 },
-  { title: "Apps web internas", icon: MonitorSmartphone },
-  { title: "Sitios para profesionales", icon: FileText },
-  { title: "Webs para comercios", icon: Store }
+  { title: "Páginas institucionales", icon: BriefcaseBusiness, color: "text-amber bg-amber/10" },
+  { title: "Landing pages", icon: Rocket, color: "text-coral bg-coral/10" },
+  { title: "Tiendas online", icon: CreditCard, color: "text-orchid bg-orchid/10" },
+  { title: "Catálogos digitales", icon: Boxes, color: "text-lime bg-lime/10" },
+  { title: "Sistemas de turnos", icon: CalendarClock, color: "text-rose bg-rose/10" },
+  { title: "Dashboards administrativos", icon: BarChart3, color: "text-aqua bg-aqua/10" },
+  { title: "Apps web internas", icon: MonitorSmartphone, color: "text-steel bg-steel/10" },
+  { title: "Sitios para profesionales", icon: FileText, color: "text-mint bg-mint/10" },
+  { title: "Webs para comercios", icon: Store, color: "text-orange bg-orange/10" }
 ];
 
 export const processSteps = [
@@ -165,9 +195,9 @@ export const proofPoints = [
 ];
 
 export const dashboardRows = [
-  { label: "Landing comercio", status: "Publicado", amount: "$250k" },
-  { label: "Tienda simple", status: "En ajuste", amount: "$550k" },
-  { label: "Sistema turnos", status: "Diseño", amount: "$950k" }
+  { label: "Restaurant mobile", status: "Publicado", amount: "$380k" },
+  { label: "Tienda accesorios", status: "En ajuste", amount: "$550k" },
+  { label: "Stock mayorista", status: "Diseño", amount: "$950k" }
 ];
 
 export const trustBadges = [

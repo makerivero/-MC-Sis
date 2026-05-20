@@ -2,8 +2,8 @@
 
 import { Mail, Send } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { contactEmail } from "@/lib/data";
 import { SectionHeading } from "@/components/SectionHeading";
+import { contactEmail } from "@/lib/data";
 
 export function Contact() {
   const [sent, setSent] = useState(false);
@@ -22,16 +22,16 @@ export function Contact() {
             title="¿Querés cotizar tu página o app web?"
             description="Contanos qué necesitás crear y te respondemos con una orientación de alcance, tiempos y presupuesto."
           />
-          <div className="mt-8 rounded-lg border border-aqua/24 bg-aqua/10 p-5">
-            <p className="text-sm font-semibold uppercase text-aqua">Email</p>
-            <a href={`mailto:${contactEmail}`} className="mt-2 inline-flex items-center gap-2 text-2xl font-semibold text-white transition hover:text-aqua">
+          <div className="mt-8 rounded-lg border border-rose/24 bg-gradient-to-br from-rose/12 via-amber/8 to-orchid/10 p-5">
+            <p className="text-sm font-semibold uppercase text-rose">Email</p>
+            <a href={`mailto:${contactEmail}`} className="mt-2 inline-flex items-center gap-2 text-2xl font-semibold text-white transition hover:text-amber">
               <Mail className="h-5 w-5" />
               {contactEmail}
             </a>
           </div>
           <a
             href={`mailto:${contactEmail}?subject=Consulta%20para%20cotizar%20web%20o%20app`}
-            className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-aqua px-6 py-3 font-semibold text-ink transition hover:bg-mint"
+            className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg bg-rose px-6 py-3 font-semibold text-white transition hover:bg-amber hover:text-ink"
           >
             <Send className="h-4 w-4" />
             Escribir por email
@@ -47,14 +47,14 @@ export function Contact() {
                 type="text"
                 required
                 placeholder="Tu nombre o marca"
-                className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition placeholder:text-white/32 focus:border-aqua"
+                className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition placeholder:text-white/32 focus:border-amber"
               />
             </label>
             <label className="grid gap-2 text-sm font-medium text-white/78">
               Tipo de proyecto
               <select
                 name="projectType"
-                className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition focus:border-aqua"
+                className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition focus:border-amber"
                 defaultValue="Landing page"
               >
                 <option>Landing page</option>
@@ -70,7 +70,7 @@ export function Contact() {
             Presupuesto estimado
             <select
               name="budget"
-              className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition focus:border-aqua"
+              className="rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition focus:border-amber"
               defaultValue="$250.000 a $380.000 ARS"
             >
               <option>$250.000 a $380.000 ARS</option>
@@ -88,17 +88,17 @@ export function Contact() {
               required
               rows={5}
               placeholder="Contanos qué vendés, qué secciones necesitás o qué sistema querés crear."
-              className="resize-none rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition placeholder:text-white/32 focus:border-aqua"
+              className="resize-none rounded-lg border border-white/10 bg-ink/60 px-4 py-3 text-white outline-none transition placeholder:text-white/32 focus:border-amber"
             />
           </label>
 
-          <button type="submit" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-aqua px-6 py-3 font-semibold text-ink transition hover:bg-mint">
+          <button type="submit" className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-amber px-6 py-3 font-semibold text-ink transition hover:bg-rose hover:text-white">
             <Send className="h-4 w-4" />
             Preparar consulta
           </button>
 
           {sent ? (
-            <div className="mt-5 rounded-lg border border-mint/35 bg-mint/12 p-4 text-sm font-medium text-mint">
+            <div className="mt-5 rounded-lg border border-lime/35 bg-lime/12 p-4 text-sm font-medium text-lime">
               Consulta preparada. Podés escribirnos a {contactEmail}
             </div>
           ) : null}

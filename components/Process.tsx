@@ -1,5 +1,14 @@
-import { processSteps } from "@/lib/data";
 import { SectionHeading } from "@/components/SectionHeading";
+import { processSteps } from "@/lib/data";
+
+const stepStyles = [
+  "bg-amber text-ink",
+  "bg-coral text-white",
+  "bg-orchid text-white",
+  "bg-lime text-ink",
+  "bg-steel text-white",
+  "bg-rose text-white"
+];
 
 export function Process() {
   return (
@@ -14,8 +23,8 @@ export function Process() {
 
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {processSteps.map((step, index) => (
-            <article key={step} className="rounded-lg border border-white/10 bg-white/7 p-5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-aqua text-sm font-bold text-ink">
+            <article key={step} className="rounded-lg border border-white/10 bg-white/7 p-5 transition hover:-translate-y-1 hover:bg-white/10">
+              <span className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-bold ${stepStyles[index]}`}>
                 {index + 1}
               </span>
               <h3 className="mt-6 text-xl font-semibold text-white">{step}</h3>

@@ -1,5 +1,5 @@
-import { proofPoints, services } from "@/lib/data";
 import { SectionHeading } from "@/components/SectionHeading";
+import { proofPoints, services } from "@/lib/data";
 
 export function Services() {
   return (
@@ -13,9 +13,9 @@ export function Services() {
               description="Desde una presencia inicial hasta un sistema interno, la idea es construir algo útil, rápido y alineado a tu negocio."
             />
             <div className="mt-8 grid gap-3">
-              {proofPoints.map((point) => (
+              {proofPoints.map((point, index) => (
                 <div key={point.title} className="rounded-lg border border-white/10 bg-white/7 p-4">
-                  <p className="font-semibold text-white">{point.title}</p>
+                  <p className={["text-amber", "text-lime", "text-orchid"][index] + " font-semibold"}>{point.title}</p>
                   <p className="mt-2 text-sm leading-6 text-white/60">{point.text}</p>
                 </div>
               ))}
@@ -24,8 +24,10 @@ export function Services() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
-              <article key={service.title} className="rounded-lg border border-white/10 bg-white/7 p-5 transition hover:border-aqua/40 hover:bg-aqua/8">
-                <service.icon className="h-6 w-6 text-aqua" />
+              <article key={service.title} className="rounded-lg border border-white/10 bg-white/7 p-5 transition hover:-translate-y-1 hover:border-white/24">
+                <div className={`inline-flex rounded-lg p-3 ${service.color}`}>
+                  <service.icon className="h-6 w-6" />
+                </div>
                 <h3 className="mt-5 text-lg font-semibold text-white">{service.title}</h3>
               </article>
             ))}

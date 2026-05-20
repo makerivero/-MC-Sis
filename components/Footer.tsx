@@ -11,7 +11,7 @@ export function Footer() {
           <p className="mt-1">Desarrollo de páginas web, tiendas online y apps web</p>
         </div>
         <div className="flex flex-col gap-2 md:items-end">
-          <a href={`mailto:${contactEmail}`} className="transition hover:text-aqua">
+          <a href={`mailto:${contactEmail}`} className="transition hover:text-amber">
             {contactEmail}
           </a>
           <p>{currentYear}</p>

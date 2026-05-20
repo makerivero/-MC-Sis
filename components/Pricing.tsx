@@ -1,6 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
-import { plans } from "@/lib/data";
 import { SectionHeading } from "@/components/SectionHeading";
+import { plans } from "@/lib/data";
 
 export function Pricing() {
   return (
@@ -8,8 +8,8 @@ export function Pricing() {
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Planes y precios"
-          title="Opciones claras para empezar con el alcance correcto"
-          description="Trabajamos con planes orientativos para que puedas ubicar tu proyecto y cotizar con más claridad desde el primer contacto."
+          title="Opciones claras, con niveles que se entienden de un vistazo"
+          description="Los planes tienen distinto alcance, distinta energía visual y una progresión comercial más fácil de comparar."
           align="center"
         />
 
@@ -17,18 +17,17 @@ export function Pricing() {
           {plans.map((plan) => (
             <article
               key={plan.name}
-              className={`rounded-lg border p-5 shadow-soft ${
-                plan.highlighted ? "border-aqua/55 bg-aqua/12" : "border-white/10 bg-white/7"
-              }`}
+              className={`relative overflow-hidden rounded-lg border p-5 shadow-soft transition hover:-translate-y-1 ${plan.surface}`}
             >
-              <span className="rounded-lg border border-white/10 bg-ink/60 px-3 py-1 text-xs font-semibold text-aqua">{plan.badge}</span>
+              {plan.highlighted ? <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber via-mint to-coral" /> : null}
+              <span className={`rounded-lg border border-white/10 bg-ink/60 px-3 py-1 text-xs font-semibold ${plan.color}`}>{plan.badge}</span>
               <h3 className="mt-5 min-h-14 text-xl font-semibold text-white">{plan.name}</h3>
-              <p className="mt-4 text-2xl font-semibold text-white">{plan.price}</p>
-              <p className="mt-4 text-sm leading-6 text-white/60">{plan.description}</p>
+              <p className={`mt-4 text-2xl font-semibold ${plan.color}`}>{plan.price}</p>
+              <p className="mt-4 text-sm leading-6 text-white/64">{plan.description}</p>
               <ul className="mt-6 space-y-3">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex gap-3 text-sm leading-6 text-white/70">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-mint" />
+                  <li key={feature} className="flex gap-3 text-sm leading-6 text-white/72">
+                    <CheckCircle2 className={`mt-0.5 h-4 w-4 shrink-0 ${plan.check}`} />
                     {feature}
                   </li>
                 ))}

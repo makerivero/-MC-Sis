@@ -1,226 +1,422 @@
 "use client";
 
-import { Check, Clock, Filter, MessageCircle, Plus, Search, ShoppingCart, UserCheck } from "lucide-react";
+import {
+  BadgePercent,
+  Calculator,
+  Check,
+  ClipboardCheck,
+  Clock,
+  FileCheck2,
+  HeartPulse,
+  Minus,
+  PackageCheck,
+  Plus,
+  Search,
+  ShoppingBag,
+  Star,
+  Truck,
+  UtensilsCrossed,
+  Wrench
+} from "lucide-react";
+import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
-import { demos } from "@/lib/data";
 import { SectionHeading } from "@/components/SectionHeading";
+import { demos } from "@/lib/data";
 
-const products = [
-  { name: "Remera MC", price: "$18.000", category: "Indumentaria" },
-  { name: "Taza premium", price: "$7.500", category: "Regalos" },
-  { name: "Kit oficina", price: "$25.000", category: "Accesorios" }
+const restaurantMenu = {
+  Entradas: [
+    { name: "Bruschettas", price: 5200, tag: "Para compartir" },
+    { name: "Empanadas criollas", price: 4200, tag: "Horno de barro" }
+  ],
+  Principales: [
+    { name: "Sorrentinos de calabaza", price: 9800, tag: "Más pedido" },
+    { name: "Bife con papas rotas", price: 12800, tag: "Recomendado" }
+  ],
+  Postres: [
+    { name: "Flan mixto", price: 3900, tag: "Casero" },
+    { name: "Tiramisú", price: 4600, tag: "Nuevo" }
+  ]
+};
+
+const accountingServices = {
+  Monotributo: ["Alta y recategorización", "Facturación", "Vencimientos"],
+  "Responsable inscripto": ["IVA", "Ganancias", "Libros digitales"],
+  Sueldos: ["Liquidación", "Recibos", "ART y cargas sociales"]
+};
+
+const healthPlans = {
+  Joven: { price: "$18.500", coverage: 62, perks: ["Clínica médica", "Odontología", "Teleconsulta"] },
+  Familia: { price: "$42.000", coverage: 78, perks: ["Pediatría", "Guardia", "Descuentos farmacia"] },
+  Integral: { price: "$68.000", coverage: 92, perks: ["Especialistas", "Internación", "Estudios complejos"] }
+};
+
+const accessoryProducts = [
+  { name: "Funda MagSafe", price: "$14.500", color: "bg-rose" },
+  { name: "Auriculares Pro", price: "$38.000", color: "bg-orchid" },
+  { name: "Cargador rápido", price: "$22.000", color: "bg-amber" }
 ];
 
-const slots = ["09:30", "10:15", "11:00", "15:30", "17:00"];
-const catalogCategories = ["Todos", "Servicios", "Productos", "Promos"];
-const tasks = ["Nuevo pedido", "Pago pendiente", "Revisar stock", "Enviar presupuesto"];
+const repairSteps = ["Ingresado", "Diagnóstico", "Presupuesto", "En reparación", "Listo"];
+
+const stockItems = [
+  { name: "Yerba 1kg", code: "YER-001", stock: 18, min: 30, price: "$1.950" },
+  { name: "Aceite 900ml", code: "ACE-090", stock: 64, min: 40, price: "$1.320" },
+  { name: "Harina 000", code: "HAR-000", stock: 11, min: 25, price: "$720" },
+  { name: "Arroz largo fino", code: "ARR-001", stock: 85, min: 50, price: "$890" }
+];
 
 export function InteractiveDemos() {
-  const [cartCount, setCartCount] = useState(1);
-  const [selectedSlot, setSelectedSlot] = useState("10:15");
-  const [category, setCategory] = useState("Todos");
-  const [doneTasks, setDoneTasks] = useState<string[]>(["Nuevo pedido"]);
+  const [restaurantTab, setRestaurantTab] = useState<keyof typeof restaurantMenu>("Principales");
+  const [restaurantCart, setRestaurantCart] = useState(2);
+  const [reservedTable, setReservedTable] = useState(false);
 
-  const visibleProducts = useMemo(() => {
-    if (category === "Todos") return products;
-    if (category === "Promos") return products.slice(0, 2);
-    return products.filter((product) => (category === "Servicios" ? product.name.includes("Kit") : !product.name.includes("Kit")));
-  }, [category]);
+  const [accountingService, setAccountingService] = useState<keyof typeof accountingServices>("Monotributo");
+  const [docs, setDocs] = useState(["DNI", "Constancia CUIT"]);
 
-  const toggleTask = (task: string) => {
-    setDoneTasks((current) => (current.includes(task) ? current.filter((item) => item !== task) : [...current, task]));
+  const [healthPlan, setHealthPlan] = useState<keyof typeof healthPlans>("Familia");
+  const [specialty, setSpecialty] = useState("Clínica médica");
+  const [healthRequested, setHealthRequested] = useState(false);
+
+  const [accessoryColor, setAccessoryColor] = useState("Negro");
+  const [accessoryCart, setAccessoryCart] = useState(1);
+
+  const [device, setDevice] = useState("Celular");
+  const [repairStep, setRepairStep] = useState(2);
+  const [urgentRepair, setUrgentRepair] = useState(false);
+
+  const [stockQuery, setStockQuery] = useState("");
+  const [stockOrder, setStockOrder] = useState(8);
+
+  const currentRestaurantItems = restaurantMenu[restaurantTab];
+  const currentDocs = accountingServices[accountingService];
+  const selectedHealthPlan = healthPlans[healthPlan];
+  const lowStock = stockItems.filter((item) => item.stock < item.min).length;
+  const visibleStock = useMemo(
+    () => stockItems.filter((item) => item.name.toLowerCase().includes(stockQuery.toLowerCase()) || item.code.toLowerCase().includes(stockQuery.toLowerCase())),
+    [stockQuery]
+  );
+
+  const toggleDoc = (doc: string) => {
+    setDocs((current) => (current.includes(doc) ? current.filter((item) => item !== doc) : [...current, doc]));
   };
 
   return (
     <section id="demos" className="px-5 py-20 md:px-8 md:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
-          eyebrow="Demos interactivas"
-          title="Una idea clara de lo que podemos construir"
-          description="Cada mockup muestra un tipo de solución posible para comercios, servicios, profesionales y marcas que quieren vender, organizarse o mostrarse mejor online."
+          eyebrow="Demos por rubro"
+          title="No vendemos una plantilla: mostramos cómo se sentiría tu negocio online"
+          description="Cada demo representa un caso comercial distinto. Son maquetas de interfaz con decisiones reales: menú, carrito, turnos, documentos, stock, estados y consultas."
         />
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          <DemoFrame title={demos[0].title} description={demos[0].description} icon={demos[0].icon}>
-            <div className="overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br from-white/12 to-white/5">
-              <div className="bg-[linear-gradient(135deg,rgba(62,230,255,0.22),rgba(255,140,107,0.16))] p-5">
-                <p className="text-sm text-white/70">Café de barrio</p>
-                <h3 className="mt-2 text-3xl font-semibold text-white">Desayunos, meriendas y panadería artesanal</h3>
-                <button className="mt-5 inline-flex items-center gap-2 rounded-lg bg-mint px-4 py-2 text-sm font-semibold text-ink">
-                  <MessageCircle className="h-4 w-4" />
-                  WhatsApp
+        <div className="mt-12 grid gap-6 xl:grid-cols-2">
+          <DemoFrame demo={demos[0]}>
+            <PhoneFrame title="Fuego Sur" subtitle="Restaurant · Palermo">
+              <div className="rounded-lg bg-gradient-to-br from-orange via-coral to-amber p-4 text-ink">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-bold uppercase">Mesa, take away y delivery</p>
+                    <h3 className="mt-2 text-3xl font-black leading-tight">Cocina de autor para pedir en 2 toques</h3>
+                  </div>
+                  <UtensilsCrossed className="h-9 w-9 shrink-0" />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setReservedTable((value) => !value)}
+                  className="mt-4 rounded-lg bg-ink px-4 py-2 text-sm font-bold text-white"
+                >
+                  {reservedTable ? "Mesa reservada" : "Reservar mesa"}
                 </button>
               </div>
-              <div className="grid gap-3 p-5 sm:grid-cols-3">
-                {["Cafetería", "Pastelería", "Take away"].map((item) => (
-                  <span key={item} className="rounded-lg border border-white/10 bg-ink/45 p-3 text-sm text-white/76">
-                    {item}
-                  </span>
+
+              <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
+                {(Object.keys(restaurantMenu) as Array<keyof typeof restaurantMenu>).map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setRestaurantTab(tab)}
+                    className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold ${
+                      restaurantTab === tab ? "bg-amber text-ink" : "bg-white/8 text-white/70"
+                    }`}
+                  >
+                    {tab}
+                  </button>
                 ))}
               </div>
-              <div className="border-t border-white/10 px-5 py-4 text-sm text-white/62">
-                Horarios: Lun a Sáb · 8:00 a 20:00
-              </div>
-            </div>
-          </DemoFrame>
 
-          <DemoFrame title={demos[1].title} description={demos[1].description} icon={demos[1].icon}>
-            <div className="rounded-lg border border-white/10 bg-ink/50 p-4">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-white/58">Tienda simple</p>
-                  <h3 className="text-xl font-semibold text-white">Productos destacados</h3>
-                </div>
-                <div className="inline-flex items-center gap-2 rounded-lg bg-aqua/12 px-3 py-2 text-aqua">
-                  <ShoppingCart className="h-4 w-4" />
-                  {cartCount}
-                </div>
-              </div>
-              <div className="grid gap-3">
-                {products.map((product) => (
-                  <div key={product.name} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/6 p-3">
-                    <div>
-                      <p className="font-medium text-white">{product.name}</p>
-                      <p className="text-sm text-white/52">{product.price}</p>
+              <div className="mt-4 space-y-3">
+                {currentRestaurantItems.map((item) => (
+                  <div key={item.name} className="flex items-center gap-3 rounded-lg bg-white/8 p-3">
+                    <div className="h-14 w-14 rounded-lg bg-gradient-to-br from-amber/80 to-coral/80" />
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold text-white">{item.name}</p>
+                      <p className="text-xs text-amber">{item.tag}</p>
+                      <p className="text-sm text-white/60">${item.price.toLocaleString("es-AR")}</p>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => setCartCount((count) => count + 1)}
-                      className="inline-flex items-center gap-2 rounded-lg bg-aqua px-3 py-2 text-sm font-semibold text-ink transition hover:bg-mint"
-                    >
+                    <button type="button" onClick={() => setRestaurantCart((count) => count + 1)} className="rounded-lg bg-amber p-2 text-ink">
                       <Plus className="h-4 w-4" />
-                      Agregar
                     </button>
                   </div>
                 ))}
               </div>
-            </div>
+
+              <div className="sticky bottom-0 mt-4 rounded-lg border border-amber/35 bg-ink/92 p-3 shadow-soft">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-white/70">{restaurantCart} items en pedido</span>
+                  <span className="font-bold text-amber">Enviar pedido</span>
+                </div>
+              </div>
+            </PhoneFrame>
           </DemoFrame>
 
-          <DemoFrame title={demos[2].title} description={demos[2].description} icon={demos[2].icon}>
-            <div className="rounded-lg border border-white/10 bg-white/6 p-4">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-white/58">Agenda online</p>
-                  <h3 className="text-xl font-semibold text-white">Elegí un horario</h3>
+          <DemoFrame demo={demos[1]}>
+            <BrowserShell title="Estudio Norte">
+              <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="rounded-lg bg-lime/12 p-4">
+                  <Calculator className="h-8 w-8 text-lime" />
+                  <h3 className="mt-4 text-2xl font-bold text-white">Consulta contable guiada</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/62">El cliente elige su situación y la web arma una lista clara de próximos pasos.</p>
+                  <div className="mt-4 grid gap-2">
+                    {(Object.keys(accountingServices) as Array<keyof typeof accountingServices>).map((service) => (
+                      <button
+                        key={service}
+                        type="button"
+                        onClick={() => setAccountingService(service)}
+                        className={`rounded-lg px-3 py-2 text-left text-sm font-semibold ${
+                          accountingService === service ? "bg-lime text-ink" : "bg-white/8 text-white/70"
+                        }`}
+                      >
+                        {service}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <Clock className="h-5 w-5 text-mint" />
+
+                <div className="rounded-lg border border-white/10 bg-white/7 p-4">
+                  <p className="text-sm font-semibold text-lime">Documentación requerida</p>
+                  <div className="mt-4 space-y-3">
+                    {["DNI", "Constancia CUIT", ...currentDocs].map((doc) => {
+                      const checked = docs.includes(doc);
+                      return (
+                        <button key={doc} type="button" onClick={() => toggleDoc(doc)} className="flex w-full items-center justify-between rounded-lg bg-ink/55 p-3 text-left">
+                          <span className="text-sm text-white">{doc}</span>
+                          <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${checked ? "bg-lime text-ink" : "bg-white/10 text-white/40"}`}>
+                            <Check className="h-4 w-4" />
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-4 rounded-lg bg-lime/10 p-3">
+                    <p className="text-sm text-white/66">Avance de consulta</p>
+                    <div className="mt-2 h-2 rounded-full bg-white/10">
+                      <div className="h-2 rounded-full bg-lime" style={{ width: `${Math.min(100, docs.length * 24)}%` }} />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="grid grid-cols-5 gap-2">
-                {["L", "M", "M", "J", "V"].map((day, index) => (
-                  <span key={day + index} className="rounded-lg border border-white/10 bg-ink/45 py-3 text-center text-sm text-white/60">
-                    {day}
-                  </span>
-                ))}
+            </BrowserShell>
+          </DemoFrame>
+
+          <DemoFrame demo={demos[2]}>
+            <PhoneFrame title="Salud Viva" subtitle="Obra social · Credencial digital">
+              <div className="rounded-lg bg-gradient-to-br from-rose via-orchid to-steel p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-white/78">Plan activo</p>
+                    <h3 className="text-3xl font-black text-white">{healthPlan}</h3>
+                  </div>
+                  <HeartPulse className="h-10 w-10 text-white" />
+                </div>
+                <p className="mt-5 text-2xl font-bold text-white">{selectedHealthPlan.price}</p>
+                <p className="text-sm text-white/72">Cobertura mensual estimada</p>
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
-                {slots.map((slot) => (
+
+              <div className="mt-4 grid grid-cols-3 gap-2">
+                {(Object.keys(healthPlans) as Array<keyof typeof healthPlans>).map((plan) => (
                   <button
-                    key={slot}
+                    key={plan}
                     type="button"
-                    onClick={() => setSelectedSlot(slot)}
-                    className={`rounded-lg border px-3 py-3 text-sm font-semibold transition ${
-                      selectedSlot === slot ? "border-mint bg-mint text-ink" : "border-white/10 bg-ink/45 text-white/70 hover:border-aqua/45"
-                    }`}
+                    onClick={() => {
+                      setHealthPlan(plan);
+                      setHealthRequested(false);
+                    }}
+                    className={`rounded-lg py-2 text-sm font-bold ${healthPlan === plan ? "bg-rose text-white" : "bg-white/8 text-white/62"}`}
                   >
-                    {slot}
+                    {plan}
                   </button>
                 ))}
               </div>
-              <div className="mt-4 flex items-center gap-3 rounded-lg border border-mint/30 bg-mint/10 p-3 text-sm text-mint">
-                <UserCheck className="h-4 w-4" />
-                Turno seleccionado: {selectedSlot}
-              </div>
-            </div>
-          </DemoFrame>
 
-          <DemoFrame title={demos[3].title} description={demos[3].description} icon={demos[3].icon}>
-            <div className="rounded-lg border border-white/10 bg-ink/50 p-4">
-              <div className="grid gap-3 sm:grid-cols-3">
-                {[
-                  ["Ventas del día", "$184.000"],
-                  ["Pedidos", "26"],
-                  ["Clientes", "142"]
-                ].map(([label, value]) => (
-                  <div key={label} className="rounded-lg border border-white/10 bg-white/6 p-3">
-                    <p className="text-xs text-white/50">{label}</p>
-                    <p className="mt-2 text-xl font-semibold text-white">{value}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-5 flex h-36 items-end gap-2 rounded-lg border border-white/10 bg-white/5 p-4">
-                {[35, 70, 48, 88, 62, 95, 76].map((height, index) => (
-                  <span
-                    key={height + index}
-                    className="flex-1 rounded-t-md bg-gradient-to-t from-violet/45 via-aqua/70 to-mint"
-                    style={{ height: `${height}%` }}
-                  />
-                ))}
-              </div>
-            </div>
-          </DemoFrame>
-
-          <DemoFrame title={demos[4].title} description={demos[4].description} icon={demos[4].icon}>
-            <div className="rounded-lg border border-white/10 bg-white/6 p-4">
-              <div className="mb-4 flex items-center gap-3 rounded-lg border border-white/10 bg-ink/45 px-3 py-2 text-white/58">
-                <Search className="h-4 w-4" />
-                Buscar por nombre o categoría
-              </div>
-              <div className="mb-4 flex flex-wrap gap-2">
-                {catalogCategories.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setCategory(item)}
-                    className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition ${
-                      category === item ? "border-aqua bg-aqua text-ink" : "border-white/10 bg-ink/45 text-white/64 hover:border-aqua/45"
-                    }`}
-                  >
-                    <Filter className="h-3.5 w-3.5" />
-                    {item}
-                  </button>
-                ))}
-              </div>
-              <div className="grid gap-3 sm:grid-cols-3">
-                {visibleProducts.map((product) => (
-                  <div key={product.name} className="rounded-lg border border-white/10 bg-ink/45 p-3">
-                    <div className="mb-3 h-20 rounded-lg bg-[linear-gradient(135deg,rgba(62,230,255,0.28),rgba(99,246,167,0.12))]" />
-                    <p className="font-medium text-white">{product.name}</p>
-                    <p className="text-sm text-white/50">{product.category}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </DemoFrame>
-
-          <DemoFrame title={demos[5].title} description={demos[5].description} icon={demos[5].icon}>
-            <div className="rounded-lg border border-white/10 bg-ink/50 p-4">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-white/58">Gestión interna</p>
-                  <h3 className="text-xl font-semibold text-white">Tareas del equipo</h3>
+              <div className="mt-4 rounded-lg bg-white/8 p-4">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-white/64">Cobertura</span>
+                  <span className="font-bold text-rose">{selectedHealthPlan.coverage}%</span>
                 </div>
-                <span className="rounded-lg bg-violet/18 px-3 py-2 text-sm font-semibold text-violet">{doneTasks.length}/{tasks.length}</span>
+                <div className="mt-2 h-2 rounded-full bg-white/10">
+                  <div className="h-2 rounded-full bg-gradient-to-r from-rose to-orchid" style={{ width: `${selectedHealthPlan.coverage}%` }} />
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {selectedHealthPlan.perks.map((perk) => (
+                    <button key={perk} type="button" onClick={() => setSpecialty(perk)} className={`rounded-lg px-3 py-2 text-xs font-semibold ${specialty === perk ? "bg-orchid text-white" : "bg-ink/60 text-white/62"}`}>
+                      {perk}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="space-y-3">
-                {tasks.map((task) => {
-                  const done = doneTasks.includes(task);
-                  return (
+
+              <button type="button" onClick={() => setHealthRequested(true)} className="mt-4 w-full rounded-lg bg-rose px-4 py-3 font-bold text-white">
+                {healthRequested ? `Turno solicitado: ${specialty}` : "Solicitar turno"}
+              </button>
+            </PhoneFrame>
+          </DemoFrame>
+
+          <DemoFrame demo={demos[3]}>
+            <PhoneFrame title="Accesorios Glow" subtitle="Tienda mobile">
+              <div className="rounded-lg bg-gradient-to-br from-violet via-orchid to-coral p-4">
+                <p className="text-sm font-bold text-white/82">Combo destacado</p>
+                <h3 className="mt-2 text-3xl font-black text-white">Funda + vidrio + cargador</h3>
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="text-2xl font-bold text-white">$49.900</span>
+                  <span className="rounded-lg bg-white px-3 py-1 text-sm font-bold text-ink">15% OFF</span>
+                </div>
+              </div>
+
+              <div className="mt-4 rounded-lg bg-white/8 p-4">
+                <p className="text-sm font-semibold text-white">Color seleccionado: {accessoryColor}</p>
+                <div className="mt-3 flex gap-2">
+                  {["Negro", "Rosa", "Azul", "Lima"].map((color) => (
                     <button
-                      key={task}
+                      key={color}
                       type="button"
-                      onClick={() => toggleTask(task)}
-                      className="flex w-full items-center justify-between rounded-lg border border-white/10 bg-white/6 p-3 text-left transition hover:border-aqua/45"
+                      onClick={() => setAccessoryColor(color)}
+                      className={`h-9 flex-1 rounded-lg border text-xs font-bold ${
+                        accessoryColor === color ? "border-white bg-white text-ink" : "border-white/10 bg-white/7 text-white/62"
+                      }`}
                     >
-                      <span className={done ? "text-white/45 line-through" : "text-white"}>{task}</span>
-                      <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${done ? "bg-mint text-ink" : "bg-white/10 text-white/42"}`}>
-                        <Check className="h-4 w-4" />
-                      </span>
+                      {color}
                     </button>
-                  );
-                })}
+                  ))}
+                </div>
               </div>
-            </div>
+
+              <div className="mt-4 space-y-3">
+                {accessoryProducts.map((product) => (
+                  <div key={product.name} className="flex items-center gap-3 rounded-lg bg-white/8 p-3">
+                    <span className={`h-12 w-12 rounded-lg ${product.color}`} />
+                    <div className="flex-1">
+                      <p className="font-semibold text-white">{product.name}</p>
+                      <p className="text-sm text-white/56">{product.price}</p>
+                    </div>
+                    <button type="button" onClick={() => setAccessoryCart((count) => count + 1)} className="rounded-lg bg-orchid p-2 text-white">
+                      <ShoppingBag className="h-4 w-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 flex items-center justify-between rounded-lg bg-orchid/16 p-3">
+                <span className="text-sm text-white/70">Carrito</span>
+                <span className="font-bold text-orchid">{accessoryCart} productos</span>
+              </div>
+            </PhoneFrame>
+          </DemoFrame>
+
+          <DemoFrame demo={demos[4]}>
+            <BrowserShell title="FixLab Servicio Técnico">
+              <div className="grid gap-4 lg:grid-cols-[1fr_1.1fr]">
+                <div className="rounded-lg bg-orange/12 p-4">
+                  <Wrench className="h-8 w-8 text-orange" />
+                  <h3 className="mt-4 text-2xl font-bold text-white">Seguimiento de reparación</h3>
+                  <div className="mt-5 grid grid-cols-3 gap-2">
+                    {["Celular", "Notebook", "Consola"].map((item) => (
+                      <button key={item} type="button" onClick={() => setDevice(item)} className={`rounded-lg px-2 py-3 text-sm font-bold ${device === item ? "bg-orange text-ink" : "bg-white/8 text-white/62"}`}>
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                  <button type="button" onClick={() => setUrgentRepair((value) => !value)} className={`mt-4 w-full rounded-lg px-4 py-3 font-bold ${urgentRepair ? "bg-rose text-white" : "bg-white/8 text-white/70"}`}>
+                    {urgentRepair ? "Prioridad urgente activada" : "Marcar como urgente"}
+                  </button>
+                </div>
+
+                <div className="rounded-lg border border-white/10 bg-white/7 p-4">
+                  <p className="text-sm font-semibold text-orange">Ticket #{device.slice(0, 3).toUpperCase()}-284</p>
+                  <div className="mt-4 space-y-3">
+                    {repairSteps.map((step, index) => (
+                      <button key={step} type="button" onClick={() => setRepairStep(index)} className="flex w-full items-center gap-3 rounded-lg bg-ink/55 p-3 text-left">
+                        <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${index <= repairStep ? "bg-orange text-ink" : "bg-white/10 text-white/40"}`}>
+                          {index <= repairStep ? <Check className="h-4 w-4" /> : index + 1}
+                        </span>
+                        <span className={index <= repairStep ? "font-semibold text-white" : "text-white/52"}>{step}</span>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="mt-4 rounded-lg bg-amber/10 p-3 text-sm text-amber">
+                    Presupuesto estimado: {urgentRepair ? "$48.000 con prioridad" : "$36.000"}
+                  </div>
+                </div>
+              </div>
+            </BrowserShell>
+          </DemoFrame>
+
+          <DemoFrame demo={demos[5]}>
+            <BrowserShell title="Mayorista Centro">
+              <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+                <div className="rounded-lg bg-aqua/10 p-4">
+                  <PackageCheck className="h-8 w-8 text-aqua" />
+                  <h3 className="mt-4 text-2xl font-bold text-white">Stock y pedidos internos</h3>
+                  <div className="mt-5 grid grid-cols-2 gap-3">
+                    <StatPill label="Productos" value="428" color="text-aqua" />
+                    <StatPill label="Alertas" value={String(lowStock)} color="text-amber" />
+                    <StatPill label="Pedido actual" value={`${stockOrder} cajas`} color="text-lime" />
+                    <StatPill label="Despachos" value="17" color="text-coral" />
+                  </div>
+                  <div className="mt-4 flex items-center gap-2 rounded-lg bg-ink/60 px-3 py-2">
+                    <Search className="h-4 w-4 text-white/46" />
+                    <input
+                      value={stockQuery}
+                      onChange={(event) => setStockQuery(event.target.value)}
+                      placeholder="Buscar producto o código"
+                      className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/36"
+                    />
+                  </div>
+                </div>
+
+                <div className="rounded-lg border border-white/10 bg-white/7 p-4">
+                  <div className="space-y-3">
+                    {visibleStock.map((item) => {
+                      const alert = item.stock < item.min;
+                      return (
+                        <div key={item.code} className="rounded-lg bg-ink/55 p-3">
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <p className="font-semibold text-white">{item.name}</p>
+                              <p className="text-xs text-white/48">{item.code} · {item.price}</p>
+                            </div>
+                            <span className={`rounded-lg px-2 py-1 text-xs font-bold ${alert ? "bg-amber text-ink" : "bg-lime/16 text-lime"}`}>
+                              {item.stock} un.
+                            </span>
+                          </div>
+                          <div className="mt-3 h-2 rounded-full bg-white/10">
+                            <div className={`h-2 rounded-full ${alert ? "bg-amber" : "bg-lime"}`} style={{ width: `${Math.min(100, (item.stock / item.min) * 70)}%` }} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="mt-4 flex items-center justify-between rounded-lg bg-aqua/10 p-3">
+                    <button type="button" onClick={() => setStockOrder((count) => Math.max(0, count - 1))} className="rounded-lg bg-white/10 p-2 text-white">
+                      <Minus className="h-4 w-4" />
+                    </button>
+                    <span className="font-bold text-aqua">Reponer {stockOrder} cajas</span>
+                    <button type="button" onClick={() => setStockOrder((count) => count + 1)} className="rounded-lg bg-aqua p-2 text-ink">
+                      <Plus className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </BrowserShell>
           </DemoFrame>
         </div>
       </div>
@@ -228,26 +424,73 @@ export function InteractiveDemos() {
   );
 }
 
-type DemoFrameProps = {
-  title: string;
-  description: string;
-  icon: (typeof demos)[number]["icon"];
-  children: React.ReactNode;
-};
+type Demo = (typeof demos)[number];
 
-function DemoFrame({ title, description, icon: Icon, children }: DemoFrameProps) {
+function DemoFrame({ demo, children }: { demo: Demo; children: ReactNode }) {
   return (
-    <article className="group rounded-lg border border-white/10 bg-white/7 p-4 shadow-soft backdrop-blur-xl transition hover:border-aqua/35">
-      <div className="mb-5 flex items-start gap-4">
-        <div className="rounded-lg border border-aqua/24 bg-aqua/12 p-3 text-aqua">
-          <Icon className="h-5 w-5" />
-        </div>
-        <div>
-          <h3 className="text-xl font-semibold text-white">{title}</h3>
-          <p className="mt-2 text-sm leading-6 text-white/60">{description}</p>
+    <article className="overflow-hidden rounded-lg border border-white/10 bg-white/7 shadow-soft backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/22">
+      <div className={`bg-gradient-to-br ${demo.accent} p-5`}>
+        <div className="flex items-start gap-4">
+          <div className={`rounded-lg border p-3 ${demo.iconClass}`}>
+            <demo.icon className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold text-white">{demo.title}</h3>
+            <p className="mt-2 text-sm leading-6 text-white/66">{demo.description}</p>
+          </div>
         </div>
       </div>
-      {children}
+      <div className="p-4 md:p-5">{children}</div>
     </article>
+  );
+}
+
+function PhoneFrame({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
+  return (
+    <div className="mx-auto max-w-sm rounded-[2rem] border border-white/18 bg-black p-3 shadow-soft">
+      <div className="rounded-[1.45rem] bg-ink p-4">
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <p className="font-bold text-white">{title}</p>
+            <p className="text-xs text-white/48">{subtitle}</p>
+          </div>
+          <span className="h-3 w-16 rounded-full bg-white/14" />
+        </div>
+        <div className="max-h-[520px] overflow-y-auto pr-1">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function BrowserShell({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="overflow-hidden rounded-lg border border-white/12 bg-ink/80">
+      <div className="flex items-center justify-between border-b border-white/10 bg-white/6 px-4 py-3">
+        <div className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded-full bg-rose" />
+          <span className="h-3 w-3 rounded-full bg-amber" />
+          <span className="h-3 w-3 rounded-full bg-lime" />
+        </div>
+        <p className="text-sm font-semibold text-white/72">{title}</p>
+        <div className="flex items-center gap-2 text-white/40">
+          <Clock className="h-4 w-4" />
+          <ClipboardCheck className="h-4 w-4" />
+          <FileCheck2 className="h-4 w-4" />
+          <Truck className="h-4 w-4" />
+          <BadgePercent className="h-4 w-4" />
+          <Star className="h-4 w-4" />
+        </div>
+      </div>
+      <div className="p-4">{children}</div>
+    </div>
+  );
+}
+
+function StatPill({ label, value, color }: { label: string; value: string; color: string }) {
+  return (
+    <div className="rounded-lg bg-white/8 p-3">
+      <p className="text-xs text-white/46">{label}</p>
+      <p className={`mt-1 text-xl font-bold ${color}`}>{value}</p>
+    </div>
   );
 }
