@@ -1,4 +1,5 @@
-import { ArrowRight, Mail, Sparkles } from "lucide-react";
+import { ArrowRight, Laptop, Mail, MonitorSmartphone, Sparkles, TabletSmartphone } from "lucide-react";
+import Image from "next/image";
 import { HeroMockup } from "@/components/HeroMockup";
 import { contactEmail } from "@/lib/data";
 
@@ -11,16 +12,29 @@ export function Hero() {
         <div>
           <div className="mb-6 inline-flex items-center gap-2 rounded-lg border border-amber/24 bg-amber/10 px-3 py-2 text-sm text-white/78 backdrop-blur">
             <Sparkles className="h-4 w-4 text-amber" />
-            Diseño web comercial para rubros reales
+            Diseño, desarrollo y resultados
           </div>
 
           <h1 className="max-w-4xl text-4xl font-semibold text-white md:text-6xl">
-            Creamos páginas web y apps para que tu negocio venda, muestre y crezca
+            Creamos páginas web y web apps multiplataforma que hacen crecer tu negocio
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70 md:text-xl">
-            Diseñamos sitios modernos, rápidos y listos para usar: desde una landing básica hasta tiendas online y sistemas web personalizados.
+            Diseñamos experiencias digitales para celular, tablet y escritorio: landings, tiendas online, catálogos, paneles internos y sistemas web listos para publicar.
           </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            {[
+              { icon: MonitorSmartphone, text: "Mobile" },
+              { icon: TabletSmartphone, text: "Tablet" },
+              { icon: Laptop, text: "Desktop" }
+            ].map((item) => (
+              <span key={item.text} className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/7 px-3 py-2 text-sm font-bold text-white/70">
+                <item.icon className="h-4 w-4 text-lime" />
+                {item.text}
+              </span>
+            ))}
+          </div>
 
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <a href="#planes" className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber px-6 py-3 font-semibold text-ink transition hover:bg-coral hover:text-white">
@@ -43,7 +57,19 @@ export function Hero() {
           </div>
         </div>
 
-        <HeroMockup />
+        <div>
+          <HeroMockup />
+          <div className="mt-5 overflow-hidden rounded-lg border border-white/10 bg-white/7 p-3">
+            <Image
+              src="/demo-screens/mc-sis-reference.png"
+              alt="Referencia visual de landing MC-Sis multiplataforma"
+              width={1800}
+              height={1400}
+              className="h-auto w-full rounded-md"
+              priority
+            />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -195,9 +195,9 @@ export const proofPoints = [
 ];
 
 export const dashboardRows = [
-  { label: "Restaurant mobile", status: "Publicado", amount: "$380k" },
-  { label: "Tienda accesorios", status: "En ajuste", amount: "$550k" },
-  { label: "Stock mayorista", status: "Diseño", amount: "$950k" }
+  { label: "Web responsive", status: "Mobile + desktop", amount: "$250k" },
+  { label: "Tienda online", status: "Carrito + catálogo", amount: "$550k" },
+  { label: "Web app interna", status: "Panel + procesos", amount: "$950k" }
 ];
 
 export const trustBadges = [

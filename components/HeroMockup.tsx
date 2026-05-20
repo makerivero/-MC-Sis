@@ -8,7 +8,7 @@ export function HeroMockup() {
         <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-4">
           <div>
             <p className="text-sm font-medium text-white/60">Panel MC-Sis</p>
-            <h3 className="mt-1 text-xl font-semibold text-white">Proyectos con identidad propia</h3>
+            <h3 className="mt-1 text-xl font-semibold text-white">Webs, apps y paneles activos</h3>
           </div>
           <div className="rounded-lg border border-amber/30 bg-amber/12 p-3 text-amber">
             <LineChart className="h-5 w-5" />
@@ -31,7 +31,7 @@ export function HeroMockup() {
 
         <div className="mt-4 rounded-lg border border-white/10 bg-ink/55 p-4">
           <div className="mb-4 flex items-center justify-between">
-            <p className="font-medium text-white">Rubros en producción</p>
+            <p className="font-medium text-white">Multiplataforma en producción</p>
             <span className="rounded-lg bg-rose/12 px-2.5 py-1 text-xs font-semibold text-rose">+24%</span>
           </div>
           <div className="flex h-28 items-end gap-2">
